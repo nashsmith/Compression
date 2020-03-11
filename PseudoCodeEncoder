@@ -1,0 +1,19 @@
+Pseudo Code Encoder
+
+String encode(String input){
+	Create empty multi-way trie t
+	string s;
+	char ch;
+	
+	while(GetNextChar(ch)){
+		if(t contains s+ch){
+			s=s+ch;
+		}
+		else{
+			encode s to output file;
+			add s+ch to t;
+			s=ch;
+		}
+	}
+	encode s to output file
+}

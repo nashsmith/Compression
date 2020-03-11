@@ -1,0 +1,21 @@
+Pseudo Code Decoder
+
+String decode(int code){
+	Create empty multi-way trie t
+	int i;
+	string s;
+	string w;
+	
+	while(GetNextCode(i)){
+		if(index exists on tree){
+			w=s;
+			s=stringfromtree;
+			Add w + s[0] to the tree;
+		}
+		else{
+			Add s + s[0] to the tree;
+			s=stringfromtree;
+		}	
+	}
+	send s to output file
+}
