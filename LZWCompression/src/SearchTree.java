@@ -40,8 +40,49 @@ public class SearchTree {
 		return null;
   }
 
-  public void insert(LeafNode node){
 
+  /*  insert(LeafNode)
+   *  Inserts a LeadNode into the tree depending on the nodes value
+   *  @returns void
+   */
+  public void insert(LeafNode node){
+    //currentNode to try insert into
+    LeafNode currentNode;
+
+    //if there is no value in the tree yet, the node goes into the root node
+    if(_root == null){
+      _root = node;
+    }else {
+      //otherwise set the currentNode to the root
+      currentNode = _root;
+    }
+
+    //while the bottom of the tree hasnt been reached
+    while(currentNode != null){
+
+      //if the nodes value is less than the current node
+      if(node._value.compareTo(currentNode) < 0){
+        //check if the left subtree is empty. If empty, insert the node
+        if(currentNode._left == null){
+          currentNode._left = node;
+          break;
+        }else{
+          //if not empty then traverse down the left branch
+          currentNode = currentNode._left;
+        }
+      //if the nodes value is more than the current node
+      }else{
+        //check if the right subtree is empty. If empty, insert the node
+        if(currentNode._right == null){
+          currentNode._right = node;
+          break;
+        }else{
+          //if not empty then traverse down the right branch
+          currentNode = currentNode._right;
+        }
+      }
+
+    }//end while
   }
 
   //Search Tree Node
