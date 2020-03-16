@@ -4,9 +4,16 @@ class Trie {
 
   class TrieNode {
 
-    int _phraseKey;
-    SearchTree _values;
-    
+    protected int _phraseKey;
+    protected SearchTree _values;
+
+    public int getPhraseKey(){
+      return _phraseKey;
+    }
+
+    public SearchTree getValues(){
+      return _phraseKey;
+    }
   }
 
 }
