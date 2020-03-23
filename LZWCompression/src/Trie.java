@@ -2,6 +2,9 @@ class Trie {
 
   TrieNode _root;
 
+  /*  Constructor(boolean)
+   *  Initialise the Trie, if the boolean is true, also prime the first trie node
+   */
   public Trie(boolean prime){
     //set root
     _root = new TrieNode(0);
@@ -16,6 +19,10 @@ class Trie {
     }
   }
 
+  /*  toString()
+   *  Gets the toString value of the trienodes search tree.
+   *  @returns String
+   */
   public String toString(){
     return _root._values.toString();
   }
