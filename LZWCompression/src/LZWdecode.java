@@ -3,6 +3,8 @@ import java.util.*;
 
 public class LZWdecode {
 	public static void main (String[] args) throws IOException{
+		//initialize output file
+		FileOutputStream out = new FileOutputStream("output");
 		//initialize dictionary
 		Map<Integer, Phrase> dictionary = new HashMap<Integer,Phrase>();
 		int i = 0;
@@ -22,7 +24,7 @@ public class LZWdecode {
 		Stack<Byte> s = v.getPattern(dictionary);
 		int lastphrasenumber = n;
 		//output pattern
-		
+		outputByteStack(s, out);
         while(input.hasNext())
         {
         	//get next code
@@ -44,12 +46,19 @@ public class LZWdecode {
         		s = tmp.getPattern(dictionary);
         	}
         	//output pattern
-        	
+        	outputByteStack(s, out);
         	//iterate variables
         	lastphrasenumber = n;
-        	currentmapkey++;
-        	        	
+        	currentmapkey++;      	
         }
         input.close();
 	  }
+	
+	private static void outputByteStack(Stack<Byte> stack, FileOutputStream o) throws IOException {
+		Stack<Byte> b = stack;
+		while(b.peek() != null) {
+			o.write(b.peek());
+			b.pop();
+		}
+	}
 }
