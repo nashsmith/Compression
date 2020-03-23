@@ -45,6 +45,14 @@ class Trie {
       return _values;
     }
 
+    /*  contains(Byte)
+     *  Checks the trienodes values for the byte pattern.
+     *  @returns boolean
+     */
+    public boolean contains(Byte pattern){
+      (_values.find(pattern)) ? return true : return false;
+    }
+
     /*  addPattern(Byte)
      *  Add a byte sequence to the tries list of patterns
      *  using SearchTree.insert()
