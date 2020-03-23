@@ -2,21 +2,28 @@ class Trie {
 
   TrieNode _root;
 
-  public Trie(){
+  public Trie(boolean prime){
     //set root
     _root = new TrieNode(0);
-    Byte b = new Byte(0);
-    //prime the roots search tree with all byte patterns
-    for(int i = 0; i < 256; i++){
-      _root._values.insert(b);
-      b++;
+
+    if(prime){
+      Byte[] bArray = new Byte[256];
+      for(int i = -128; i < 128; i++){
+        bArray[i + 128] = new Byte(Integer.toString(i));
+      }
+      //prime the roots search tree with all byte patterns
+      _root._values = new SearchTree(bArray, 0, bArray.length - 1);
     }
+  }
+
+  public String toString(){
+    return _root._values.toString();
   }
 
   class TrieNode {
 
     protected int _phraseKey;
-    protected SearchTree _values;
+    public SearchTree _values;
 
     public TrieNode(int phraseKey){
       _phraseKey = phraseKey;
@@ -28,7 +35,7 @@ class Trie {
     }
 
     public SearchTree getValues(){
-      return _phraseKey;
+      return _values;
     }
   }
 
