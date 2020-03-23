@@ -1,7 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class LZWencode {
 
-  public static void main (String[] args){
+  public static void main (String[] args) throws IOException{
     //get input
+	byte[] fileContent = Files.readAllBytes(Paths.get(args[0]));
     //find first inputs phrase number
     //check if the next input is in the Trie
     //YES
@@ -13,3 +18,5 @@ public class LZWencode {
       //output the phrase number of the first input
   }
 }
+
+	
