@@ -44,6 +44,15 @@ class Trie {
     public SearchTree getValues(){
       return _values;
     }
+
+    /*  addPattern(Byte)
+     *  Add a byte sequence to the tries list of patterns
+     *  using SearchTree.insert()
+     *  @returns void
+     */
+    public void addPattern(Byte pattern){
+      _values.insert(pattern);
+    }
   }
 
 }
