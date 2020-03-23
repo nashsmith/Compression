@@ -16,12 +16,23 @@ public class SearchTree {
     _root = new LeafNode();
   }
 
+
+  /*  toString()
+   *  Traverses the tree and records every value
+   *  @returns String
+   */
   public String toString(){
     _toString = "";
     traverse(_root);
     return _toString;
   }
 
+
+  /*  prime(Byte[], int, int)
+   *  Rescursively primes the search tree with 256 byte patterns
+   *  in the most optimised way.
+   *  @returns LeafNode
+   */
   private LeafNode prime(Byte[] patterns, int min, int max){
     if(min > max){
     			return null;
@@ -33,8 +44,12 @@ public class SearchTree {
 		return root;
   }
 
-  /*traverses the BST and adds each nodes string value to the global _toString variable*/
-	private void traverse(LeafNode currentNode){
+  /*  traverse(Byte)
+   *  Rescursively records values for each item in the tree, starting down
+   *  the left side and progressing right.
+   *  @returns void (Adds values to SearchTree._toString)
+   */
+   private void traverse(LeafNode currentNode){
 
 		//if there is a left subtree
 		if(currentNode._left != null){
