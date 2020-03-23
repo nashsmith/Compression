@@ -2,13 +2,55 @@
 public class SearchTree {
 
   public LeafNode _root;
+  public String _toString;
 
   /*Constructor setting value*/
+  public SearchTree(Byte[] byteArray, int min, int max){
+
+    _root = prime(byteArray, min, max);
+    _toString = "";
+  }
+
   public SearchTree(){
 
-    _root = new LeafNode(new Byte());
-
+    _root = new LeafNode();
   }
+
+  public String toString(){
+    _toString = "";
+    traverse(_root);
+    return _toString;
+  }
+
+  private LeafNode prime(Byte[] patterns, int min, int max){
+    if(min > max){
+    			return null;
+    }
+		int median = (min + max) / 2;
+		LeafNode root = new LeafNode(patterns[median]);
+		root._left = prime(patterns, min, median - 1);
+		root._right = prime(patterns, median + 1, max);
+		return root;
+  }
+
+  /*traverses the BST and adds each nodes string value to the global _toString variable*/
+	private void traverse(LeafNode currentNode){
+
+		//if there is a left subtree
+		if(currentNode._left != null){
+			//traverse it
+			traverse(currentNode._left);
+		}
+
+		//deal with the value
+		_toString += currentNode._value + "\n";
+
+		//if there is a right subtree
+		if(currentNode._right != null){
+			//traverse it
+			traverse(currentNode._right);
+		}
+	}
 
 /*  find(Byte)
  *  Finds a LeafNode conatining a byte pattern in the search tree.
@@ -52,6 +94,7 @@ public class SearchTree {
     //if there is no value in the tree yet, the node goes into the root node
     if(_root == null){
       _root = node;
+      return;
     }else {
       //otherwise set the currentNode to the root
       currentNode = _root;
@@ -61,7 +104,7 @@ public class SearchTree {
     while(currentNode != null){
 
       //if the nodes value is less than the current node
-      if(node._value.compareTo(currentNode) < 0){
+      if(node._value.compareTo(currentNode._value) < 0){
         //check if the left subtree is empty. If empty, insert the node
         if(currentNode._left == null){
           currentNode._left = node;
@@ -97,6 +140,15 @@ public class SearchTree {
 		public LeafNode(Byte value){
 
 			_value = value;
+			_left = null;
+			_right = null;
+      _nextPhrase = null;
+
+		}
+
+    public LeafNode(){
+
+			_value = null;
 			_left = null;
 			_right = null;
       _nextPhrase = null;
