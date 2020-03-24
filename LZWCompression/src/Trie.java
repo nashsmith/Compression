@@ -21,6 +21,12 @@ class Trie {
     }
   }
 
+  /*  findPhrase(Byte[])
+   *  Searches the for the longest matching phrasekey to the pattern.
+   *  After each proceeding trienode is reached, the index is moved
+   *  to the next byte pattern in the overall Byte[] pattern.
+   *  @returns int
+   */
   public int findPhrase(Byte[] pattern){
     int patternLength = pattern.length;
     TrieNode currentTrieNode = _root;
