@@ -149,7 +149,7 @@ public class SearchTree {
 		public Byte _value;
 		public LeafNode _left;
 		public LeafNode _right;
-    public Trie _nextPhrase;
+    public TrieNode _nextPhrase;
 
 		/*Constructor setting value*/
 		public LeafNode(Byte value){
@@ -160,6 +160,10 @@ public class SearchTree {
       _nextPhrase = null;
 
 		}
+
+    public TrieNode getNextPhrase(){
+      return _nextPhrase;
+    }
 
     public LeafNode(){
 

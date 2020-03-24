@@ -44,6 +44,33 @@ class Trie {
     public SearchTree getValues(){
       return _values;
     }
+
+    /*  contains(Byte)
+     *  Checks the trienodes values for the byte pattern.
+     *  @returns boolean
+     */
+    public boolean contains(Byte pattern){
+      (_values.find(pattern)) ? return true : return false;
+    }
+
+    /*  getNextPhrase(Byte)
+     *  Gets the TrieNode for the next phrase. Null if the pattern isnt
+     *  in this TrieNodes values
+     *  @returns boolean
+     */
+    public TrieNode getNextPhrase(Byte pattern){
+      TrieNode node = _values.find(pattern).getNextPhrase();
+      return node;
+    }
+
+    /*  addPattern(Byte)
+     *  Add a byte sequence to the tries list of patterns
+     *  using SearchTree.insert()
+     *  @returns void
+     */
+    public void addPattern(Byte pattern){
+      _values.insert(pattern);
+    }
   }
 
 }
