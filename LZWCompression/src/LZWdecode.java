@@ -25,8 +25,7 @@ public class LZWdecode {
 		int lastphrasenumber = n;
 		//output pattern
 		outputByteStack(s, out);
-        while(input.hasNext())
-        {
+        while(input.hasNext()){
         	//get next code
         	n = input.nextInt();
         	if(dictionary.get(n) != null) {
