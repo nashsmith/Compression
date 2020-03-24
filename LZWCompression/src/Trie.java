@@ -21,6 +21,22 @@ class Trie {
     }
   }
 
+  public int findPhrase(Byte[] pattern){
+    int patternLength = pattern.length;
+    TrieNode currentTrieNode = _root;
+    int index = 0;
+
+    while(currentTrieNode.contains(pattern[index])){
+      currentTrieNode = currentTrieNode.getNextPhrase(pattern[index]);
+      if(index < patternLength - 1){
+        index++;
+      }else{
+        break;
+      }
+    }
+    return currentTrieNode.getPhraseKey();
+  }
+
   /*  toString()
    *  Gets the toString value of the trienodes search tree.
    *  @returns String
