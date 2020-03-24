@@ -53,6 +53,16 @@ class Trie {
       (_values.find(pattern)) ? return true : return false;
     }
 
+    /*  getNextPhrase(Byte)
+     *  Gets the TrieNode for the next phrase. Null if the pattern isnt
+     *  in this TrieNodes values
+     *  @returns boolean
+     */
+    public TrieNode getNextPhrase(Byte pattern){
+      TrieNode node = _values.find(pattern).getNextPhrase();
+      return node;
+    }
+
     /*  addPattern(Byte)
      *  Add a byte sequence to the tries list of patterns
      *  using SearchTree.insert()
