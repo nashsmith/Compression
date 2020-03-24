@@ -1,5 +1,5 @@
 
-public class SearchTree {
+class SearchTree {
 
   public LeafNode _root;
   public String _toString;
@@ -42,6 +42,25 @@ public class SearchTree {
 		root._left = prime(patterns, min, median - 1);
 		root._right = prime(patterns, median + 1, max);
 		return root;
+  }
+
+  public void traverseTopDown(LeafNode currentNode){
+
+    //deal with the value
+		_toString += currentNode._value + "\n";
+
+
+    //if there is a left subtree
+		if(currentNode._left != null){
+			//traverse it
+			traverseTopDown(currentNode._left);
+		}
+
+		//if there is a right subtree
+		if(currentNode._right != null){
+			//traverse it
+			traverseTopDown(currentNode._right);
+		}
   }
 
   /*  traverse(Byte)
@@ -102,9 +121,10 @@ public class SearchTree {
    *  Inserts a LeadNode into the tree depending on the nodes value
    *  @returns void
    */
-  public void insert(LeafNode node){
+  public void insert(Byte pattern){
     //currentNode to try insert into
     LeafNode currentNode;
+    LeafNode node = new LeafNode(pattern);
 
     //if there is no value in the tree yet, the node goes into the root node
     if(_root == null){
