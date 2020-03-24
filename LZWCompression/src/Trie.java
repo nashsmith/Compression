@@ -56,7 +56,7 @@ class Trie {
     /*  getNextPhrase(Byte)
      *  Gets the TrieNode for the next phrase. Null if the pattern isnt
      *  in this TrieNodes values
-     *  @returns boolean
+     *  @returns TrieNode
      */
     public TrieNode getNextPhrase(Byte pattern){
       TrieNode node = _values.find(pattern).getNextPhrase();
