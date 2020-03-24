@@ -1,6 +1,6 @@
 class Trie {
 
-  TrieNode _root;
+  public TrieNode _root;
 
   /*  Constructor(boolean)
    *  Initialise the Trie, if the boolean is true, also prime the first trie node
@@ -50,7 +50,10 @@ class Trie {
      *  @returns boolean
      */
     public boolean contains(Byte pattern){
-      (_values.find(pattern)) ? return true : return false;
+      if(_values.find(pattern)){
+        return true;
+      }
+      return false;
     }
 
     /*  getNextPhrase(Byte)
