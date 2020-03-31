@@ -87,6 +87,12 @@ class TrieNode {
   protected int _phraseKey;
   public SearchTree _values;
 
+  public TrieNode(int phraseKey, Byte pattern){
+    _phraseKey = phraseKey;
+    _values = new SearchTree(pattern);
+  }
+
+  //only for trienodes with primed values tree
   public TrieNode(int phraseKey){
     _phraseKey = phraseKey;
     _values = new SearchTree();
