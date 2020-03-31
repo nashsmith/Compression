@@ -163,35 +163,37 @@ class SearchTree {
     }//end while
   }
 
-  //Search Tree Node
-  class LeafNode {
 
-		public Byte _value;
-		public LeafNode _left;
-		public LeafNode _right;
-    public TrieNode _nextPhrase;
+}
 
-		/*Constructor setting value*/
-		public LeafNode(Byte value){
+//Search Tree Node
+class LeafNode {
 
-			_value = value;
-			_left = null;
-			_right = null;
-      _nextPhrase = null;
+  public Byte _value;
+  public LeafNode _left;
+  public LeafNode _right;
+  public TrieNode _nextPhrase;
 
-		}
+  /*Constructor setting value*/
+  public LeafNode(Byte value){
 
-    public TrieNode getNextPhrase(){
-      return _nextPhrase;
-    }
+    _value = value;
+    _left = null;
+    _right = null;
+    _nextPhrase = null;
 
-    public LeafNode(){
+  }
 
-			_value = null;
-			_left = null;
-			_right = null;
-      _nextPhrase = null;
+  public TrieNode getNextPhrase(){
+    return _nextPhrase;
+  }
 
-		}
-	}
+  public LeafNode(){
+
+    _value = null;
+    _left = null;
+    _right = null;
+    _nextPhrase = null;
+
+  }
 }
