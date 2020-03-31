@@ -127,8 +127,11 @@ class TrieNode {
    *  @returns TrieNode
    */
   public TrieNode getNextPhrase(Byte pattern){
-    TrieNode node = _values.find(pattern).getNextPhrase();
-    return node;
+    LeafNode node = _values.find(pattern);
+    if(node.getNextPhrase() != null){
+      return node.getNextPhrase();
+    }
+    return null;
   }
 
   /*  addPattern(Byte)
