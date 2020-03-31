@@ -14,9 +14,14 @@ public class LZWencode {
     //setup Trie phrase dictionary
     Trie phraseList = new Trie(true);
 
+    //find longest match
+      //find TrieNode
+
+
+
     //find first inputs phrase number
     Byte[] firstInput = {new Byte(fileContent[0])};
-    int phrasekey = phraseList.findPhrase(firstInput);
+    int phrasekey = phraseList.findPhraseKey(firstInput);
     System.out.print(Integer.toString(phrasekey));
 
     //check if the next input is in the Trie
