@@ -77,7 +77,7 @@ class SearchTree {
 		}
 
 		//deal with the value
-		_toString += currentNode._value + "\n";
+		_toString += currentNode._value + " ";
 
 		//if there is a right subtree
 		if(currentNode._right != null){
