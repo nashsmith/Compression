@@ -107,7 +107,7 @@ class TrieNode {
   }
 
   public String toString(){
-    return _values.toString();
+    return "TrieNode: " + _values.toString();
   }
 
   /*  contains(Byte)
