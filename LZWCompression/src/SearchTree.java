@@ -49,25 +49,6 @@ class SearchTree {
 		return root;
   }
 
-  public void traverseTopDown(LeafNode currentNode){
-
-    //deal with the value
-		_toString += currentNode._value + "\n";
-
-
-    //if there is a left subtree
-		if(currentNode._left != null){
-			//traverse it
-			traverseTopDown(currentNode._left);
-		}
-
-		//if there is a right subtree
-		if(currentNode._right != null){
-			//traverse it
-			traverseTopDown(currentNode._right);
-		}
-  }
-
   /*  traverse(Byte)
    *  Rescursively records values for each item in the tree, starting down
    *  the left side and progressing right.
