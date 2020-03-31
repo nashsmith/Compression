@@ -11,6 +11,11 @@ class SearchTree {
     _toString = "";
   }
 
+  public SearchTree(Byte pattern){
+
+    _root = new LeafNode(pattern);
+  }
+
   public SearchTree(){
 
     _root = new LeafNode();
