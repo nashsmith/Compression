@@ -21,6 +21,28 @@ class Trie {
     }
   }
 
+  public boolean contains(Byte[] pattern){
+    TrieNode currentNode = _root;
+    //System.out.println(_root);
+    int count = 0;
+    for(int i = 0; i < pattern.length; i++){
+      if(currentNode == null){
+        break;
+      }
+      if(currentNode.contains(pattern[i])){
+        count++;
+        currentNode = currentNode.findValue(pattern[i]).getNextPhrase();
+      }else{
+        break;
+      }
+    }
+    if(count == pattern.length){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   /*  findPhrase(Byte[])
    *  Searches the for the longest matching phrasekey to the pattern.
    *  After each proceeding trienode is reached, the index is moved
@@ -128,6 +150,10 @@ class TrieNode {
       return node.getNextPhrase();
     }
     return null;
+  }
+
+  public LeafNode findValue(Byte pattern){
+    return _values.find(pattern);
   }
 
   /*  addPattern(Byte)
