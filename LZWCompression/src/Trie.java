@@ -121,6 +121,10 @@ class TrieNode {
     return false;
   }
 
+  public LeafNode findLeaf(Byte pattern){
+    return _values.find(pattern);
+  }
+
   /*  getNextPhrase(Byte)
    *  Gets the TrieNode for the next phrase. Null if the pattern isnt
    *  in this TrieNodes values
@@ -128,8 +132,8 @@ class TrieNode {
    */
   public TrieNode getNextPhrase(Byte pattern){
     LeafNode node = _values.find(pattern);
-    if(node.getNextPhrase() != null){
-      return node.getNextPhrase();
+    if(node.getNextTrieNode() != null){
+      return node.getNextTrieNode();
     }
     return null;
   }

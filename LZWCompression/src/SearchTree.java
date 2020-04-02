@@ -3,10 +3,11 @@ class SearchTree {
 
   public LeafNode _root;
   public String _toString;
+  private int phraseCount;
 
   /*Constructor setting value*/
   public SearchTree(Byte[] byteArray, int min, int max){
-
+    phraseCount = 1;
     _root = prime(byteArray, min, max);
     _toString = "";
   }
@@ -43,7 +44,8 @@ class SearchTree {
     			return null;
     }
 		int median = (min + max) / 2;
-		LeafNode root = new LeafNode(patterns[median]);
+		LeafNode root = new LeafNode(patterns[median], phraseCount);
+    phraseCount++;
 		root._left = prime(patterns, min, median - 1);
 		root._right = prime(patterns, median + 1, max);
 		return root;
@@ -179,7 +181,7 @@ class LeafNode {
 
   }
 
-  public TrieNode getNextPhrase(){
+  public TrieNode getNextTrieNode(){
     return _trieNode;
   }
 

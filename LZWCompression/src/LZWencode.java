@@ -1,23 +1,40 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.*;
 
 public class LZWencode {
 
   public static void main (String[] args) throws IOException{
+    //initialize output file
+		FileOutputStream out = new FileOutputStream("output");
     //get input
-    byte[] temp = Files.readAllBytes(Paths.get(args[0]));
-    Byte[] fileContent = new Byte[temp.length];
-    for(int i = 0; i < temp.length; i++){
-      fileContent[i] = new Byte(Byte.valueOf(temp[i]));
-    }
+    File file = new File(args[0]);
+		Scanner input = new Scanner(file);
+
     //setup Trie phrase dictionary
     Trie phraseList = new Trie(true);
 
+    Byte currentInput = new Byte(input.nextByte());
+
+    //find the first input in the trie
+    TrieNode currentTrieNode = phraseList._root;
+
+    LeafNode bytesLeaf = currentTrieNode.findLeaf(currentInput);
+
+    currentTrieNode = bytesLeaf.getNextTrieNode();
+
+    int currentPhraseKey = currentTrieNode.getPhraseKey();
+
+    System.out.println(currentPhraseKey);
+
+
+
+
+
+
+
+
+
     //find first inputs phrase number
-    Byte[] firstInput = {new Byte(fileContent[0])};
-    int phrasekey = phraseList.findPhrase(firstInput);
-    System.out.print(Integer.toString(phrasekey));
 
     //check if the next input is in the Trie
     //YES
