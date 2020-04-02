@@ -158,20 +158,29 @@ class LeafNode {
   public Byte _value;
   public LeafNode _left;
   public LeafNode _right;
-  public TrieNode _nextPhrase;
+  public TrieNode _trieNode;
 
   /*Constructor setting value*/
+  public LeafNode(Byte value, int phraseKey){
+
+    _value = value;
+    _left = null;
+    _right = null;
+    _trieNode = new TrieNode(phraseKey);
+
+  }
+
   public LeafNode(Byte value){
 
     _value = value;
     _left = null;
     _right = null;
-    _nextPhrase = null;
+    _trieNode = null;
 
   }
 
   public TrieNode getNextPhrase(){
-    return _nextPhrase;
+    return _trieNode;
   }
 
   public LeafNode(){
@@ -179,7 +188,7 @@ class LeafNode {
     _value = null;
     _left = null;
     _right = null;
-    _nextPhrase = null;
+    _trieNode = null;
 
   }
 }
