@@ -83,7 +83,7 @@ class SearchTree {
 		//while we havent reached the end of the tree
 		while(currentNode != null){
 			//if the current node value is the byte passed in
-			if(pattern == currentNode._value){
+			if(pattern.compareTo(currentNode._value) == 0){
 				//the tree contains the word
 				return currentNode;
 			}
