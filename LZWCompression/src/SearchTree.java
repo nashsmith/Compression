@@ -89,7 +89,7 @@ class SearchTree {
 		LeafNode currentNode = _root;
 
 		//while we havent reached the end of the tree
-		while(currentNode != null){
+		while(currentNode != null && currentNode._value != null){
 			//if the current node value is the byte passed in
 			if(pattern.compareTo(currentNode._value) == 0){
 				//the tree contains the word
@@ -174,7 +174,7 @@ class LeafNode {
     _value = value;
     _left = null;
     _right = null;
-    _trieNode = new TrieNode(value, phraseKey);
+    _trieNode = new TrieNode(phraseKey);
 
   }
 

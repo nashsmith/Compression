@@ -19,7 +19,7 @@ public class LZWencode {
     int phraseKey = 0;
     int temp;
     while((temp = inputstream.read()) != -1){
-      currentInput = new Byte((byte)(temp - 128));
+      currentInput = new Byte((byte)(temp));
       //find the first input in the trie
       TrieNode currentTrieNode = phraseList._root;
 
@@ -29,7 +29,7 @@ public class LZWencode {
         if(currentTrieNode.findValue(currentInput).getNextTrieNode() != null){
           currentTrieNode = currentTrieNode.findValue(currentInput).getNextTrieNode();
           phraseKey = currentTrieNode.getPhraseKey();
-          inputstream.mark(2);
+          //inputstream.mark(1);
           currentInput = new Byte((byte)inputstream.read());
         //if the nexttrienode is not initialized then the pattern doesnt exists
         //add the next trienode with currentPhraseKey
@@ -47,7 +47,7 @@ public class LZWencode {
       byte[] o = s.getBytes();
       out.write(o);
       //reset inputstream
-      inputstream.reset();
+      //inputstream.reset();
 
     }
 
