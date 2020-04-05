@@ -19,7 +19,12 @@ public class LZWencode {
     int phraseKey = 0;
     int temp;
     while((temp = inputstream.read()) != -1){
-      currentInput = new Byte((byte)(temp));
+      if(temp < 128){
+        currentInput = new Byte((byte)(temp));
+      }else{
+        currentInput = new Byte((byte)(temp - 256));
+      }
+
       //find the first input in the trie
       TrieNode currentTrieNode = phraseList._root;
 
@@ -29,8 +34,14 @@ public class LZWencode {
         if(currentTrieNode.findValue(currentInput).getNextTrieNode() != null){
           currentTrieNode = currentTrieNode.findValue(currentInput).getNextTrieNode();
           phraseKey = currentTrieNode.getPhraseKey();
-          //inputstream.mark(1);
-          currentInput = new Byte((byte)inputstream.read());
+          inputstream.mark(1);
+          temp = inputstream.read();
+          if(temp < 128){
+            currentInput = new Byte((byte)(temp));
+          }else{
+            currentInput = new Byte((byte)(temp - 256));
+          }
+          // currentInput = new Byte((byte)inputstream.read());
         //if the nexttrienode is not initialized then the pattern doesnt exists
         //add the next trienode with currentPhraseKey
         //break
@@ -40,6 +51,10 @@ public class LZWencode {
           break;
         }
       }
+    if(!(currentTrieNode.contains(currentInput))){
+      currentTrieNode._values.insert(currentInput, phraseKeyCount);
+      phraseKeyCount++;
+    }
       //currentTrieNode is the nextTrieNode of the last byte of the longest pattern
       //output the phraseKey
       System.out.println(phraseKey);
@@ -47,7 +62,7 @@ public class LZWencode {
       byte[] o = s.getBytes();
       out.write(o);
       //reset inputstream
-      //inputstream.reset();
+      inputstream.reset();
 
     }
 

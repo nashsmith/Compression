@@ -25,7 +25,7 @@ class SearchTree {
 
   public SearchTree(){
 
-    _root = new LeafNode();
+    _root = null;
   }
 
 
@@ -50,7 +50,7 @@ class SearchTree {
     			return null;
     }
 		int median = (min + max) / 2;
-		LeafNode root = new LeafNode(patterns[median], _phraseCount);
+		LeafNode root = new LeafNode(patterns[median], median);
     _phraseCount++;
 		root._left = prime(patterns, min, median - 1);
 		root._right = prime(patterns, median + 1, max);
@@ -176,6 +176,7 @@ class LeafNode {
     _right = null;
     _trieNode = new TrieNode(phraseKey);
 
+
   }
 
   public LeafNode(Byte value){
@@ -187,10 +188,6 @@ class LeafNode {
 
   }
 
-  public TrieNode getNextTrieNode(){
-    return _trieNode;
-  }
-
   public LeafNode(){
 
     _value = null;
@@ -198,5 +195,9 @@ class LeafNode {
     _right = null;
     _trieNode = null;
 
+  }
+
+  public TrieNode getNextTrieNode(){
+    return _trieNode;
   }
 }
