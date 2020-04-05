@@ -12,7 +12,6 @@ public class LZWdecode {
 			byte bytei = (byte)i;
 			Phrase p = new Phrase(null, bytei);
 			dictionary.put(i, p);
-			System.out.print(bytei);
 			}
 		//get input
 		File file = new File(args[0]);
@@ -55,8 +54,9 @@ public class LZWdecode {
 	
 	private static void outputByteStack(Stack<Byte> stack, FileOutputStream o) throws IOException {
 		Stack<Byte> b = stack;
-		while(b.peek() != null) {
+		while(!b.empty()) {
 			o.write(b.peek());
+			o.write("\n".getBytes());
 			b.pop();
 		}
 	}

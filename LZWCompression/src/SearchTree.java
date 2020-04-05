@@ -4,15 +4,15 @@ public class SearchTree {
   public LeafNode _root;
 
   /*Constructor setting value*/
-  public SearchTree(){
+ // public SearchTree(){
 
-    _root = new LeafNode(new Byte());
+//    _root = new LeafNode(new Byte());
 
-  }
+//  }
 
-  public int find(Byte pattern){
-
-  }
+//  public int find(Byte pattern){
+//
+ // }
 
   public void insert(LeafNode node){
 

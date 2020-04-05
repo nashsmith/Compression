@@ -14,7 +14,7 @@ public class LZWpack {
 		while(input.hasNext()){
 			 t = input.nextInt();
 			 if(n <= t) {
-				 t = n;
+				 n = t;
 			 }
 	    }
 		input.close();
@@ -50,6 +50,8 @@ public class LZWpack {
 					b = (byte)(b | tmp);
 					//output byte
 					out.write(b);
+					b = 0;
+					bufferspace = 8;
 				}
 				else {
 					//shift left 8 - x
@@ -60,10 +62,16 @@ public class LZWpack {
 					bufferspace = bufferspace - x;
 					//set x to 0
 					x = 0;
+					if(bufferspace == 0) {
+						out.write(b);
+						b = 0;
+						bufferspace = 8;
+					}
 				}
 			}
-		//output byte 
-		out.write(b);
+		}
+		if(bufferspace != 8) {
+			out.write(b);
 		}
 		out.close();
 		input.close();
