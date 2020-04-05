@@ -3,11 +3,7 @@ class SearchTree {
 
   public LeafNode _root;
   public String _toString;
-<<<<<<< HEAD
-  private int phraseCount;
-=======
   public int _phraseCount;
->>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
   /*Constructor setting value*/
   public SearchTree(Byte[] byteArray, int min, int max){
@@ -49,13 +45,8 @@ class SearchTree {
     			return null;
     }
 		int median = (min + max) / 2;
-<<<<<<< HEAD
-		LeafNode root = new LeafNode(patterns[median], phraseCount);
-    phraseCount++;
-=======
 		LeafNode root = new LeafNode(patterns[median], _phraseCount);
     _phraseCount++;
->>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 		root._left = prime(patterns, min, median - 1);
 		root._right = prime(patterns, median + 1, max);
 		return root;
@@ -175,7 +166,6 @@ class LeafNode {
 
   /*Constructor setting value*/
   public LeafNode(Byte value, int phraseKey){
-<<<<<<< HEAD
 
     _value = value;
     _left = null;
@@ -185,18 +175,11 @@ class LeafNode {
   }
 
   public LeafNode(Byte value){
-=======
->>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
     _value = value;
     _left = null;
     _right = null;
-<<<<<<< HEAD
     _trieNode = null;
-=======
-    _phraseKey = phraseKey;
-    _nextPhrase = null;
->>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
   }
 
