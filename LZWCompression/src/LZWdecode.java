@@ -8,10 +8,12 @@ public class LZWdecode {
 		//initialize dictionary
 		Map<Integer, Phrase> dictionary = new HashMap<Integer,Phrase>();
 		int i = 0;
-		for(i = 0; i < 256; i++) {
+		int num = 0;
+		for(i = -128; i < 128; i++) {
 			byte bytei = (byte)i;
 			Phrase p = new Phrase(null, bytei);
-			dictionary.put(i, p);
+			dictionary.put(num, p);
+			num++;
 			}
 		//get input
 		File file = new File(args[0]);
