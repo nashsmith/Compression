@@ -55,10 +55,9 @@ public class LZWdecode {
 	  }
 	
 	private static void outputByteStack(Stack<Byte> stack, FileOutputStream o) throws IOException {
-		Stack<Byte> b = stack;
+		Stack<Byte> b = (Stack<Byte>) stack.clone();
 		while(!b.empty()) {
 			o.write(b.peek());
-			o.write("\n".getBytes());
 			b.pop();
 		}
 	}
