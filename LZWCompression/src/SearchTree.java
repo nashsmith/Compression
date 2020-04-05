@@ -22,7 +22,7 @@ class SearchTree {
 
     _root = new LeafNode(pattern);
   }
-
+  
   public SearchTree(){
 
     _root = null;
