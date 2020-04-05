@@ -9,7 +9,7 @@ class Trie {
    */
   public Trie(boolean prime){
     //set root
-    _root = new TrieNode(0);
+    _root = new TrieNode();
 
     if(prime){
       Byte[] bArray = new Byte[256];
@@ -18,6 +18,28 @@ class Trie {
       }
       //prime the roots search tree with all byte patterns
       _root._values = new SearchTree(bArray, 0, bArray.length - 1);
+    }
+  }
+
+  public boolean contains(Byte[] pattern){
+    TrieNode currentNode = _root;
+    //System.out.println(_root);
+    int count = 0;
+    for(int i = 0; i < pattern.length; i++){
+      if(currentNode == null){
+        break;
+      }
+      if(currentNode.contains(pattern[i])){
+        count++;
+        currentNode = currentNode.findValue(pattern[i]).getNextPhrase();
+      }else{
+        break;
+      }
+    }
+    if(count == pattern.length){
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -60,14 +82,18 @@ class Trie {
     int index = 0;
 
     while(currentTrieNode.contains(pattern[index])){
-      currentTrieNode = currentTrieNode.getNextPhrase(pattern[index]);
+      if(currentTrieNode.getNextPhrase(pattern[index]) != null){
+        currentTrieNode = currentTrieNode.getNextPhrase(pattern[index]);
+      }else{
+        break;
+      }
       if(index < patternLength - 1){
         index++;
       }else{
         break;
       }
     }
-    return currentTrieNode.getPhraseKey();
+    return currentTrieNode._values.find(pattern[index]).getPhraseKey();
   }
 
   /*  toString()
@@ -84,22 +110,14 @@ class Trie {
 
 class TrieNode {
 
-  protected int _phraseKey;
   public SearchTree _values;
 
-  public TrieNode(int phraseKey, Byte pattern){
-    _phraseKey = phraseKey;
-    _values = new SearchTree(pattern);
+  public TrieNode(Byte pattern, int phraseKey){
+    _values = new SearchTree(pattern, phraseKey);
   }
 
-  //only for trienodes with primed values tree
-  public TrieNode(int phraseKey){
-    _phraseKey = phraseKey;
+  public TrieNode(){
     _values = new SearchTree();
-  }
-
-  public int getPhraseKey(){
-    return _phraseKey;
   }
 
   public SearchTree getValues(){
@@ -138,12 +156,16 @@ class TrieNode {
     return null;
   }
 
+  public LeafNode findValue(Byte pattern){
+    return _values.find(pattern);
+  }
+
   /*  addPattern(Byte)
    *  Add a byte sequence to the tries list of patterns
    *  using SearchTree.insert()
    *  @returns void
    */
-  public void addPattern(Byte pattern){
-    _values.insert(pattern);
+  public void addPattern(Byte pattern, int phraseKey){
+    _values.insert(pattern, phraseKey);
   }
 }

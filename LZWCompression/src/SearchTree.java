@@ -3,18 +3,23 @@ class SearchTree {
 
   public LeafNode _root;
   public String _toString;
+<<<<<<< HEAD
   private int phraseCount;
+=======
+  public int _phraseCount;
+>>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
   /*Constructor setting value*/
   public SearchTree(Byte[] byteArray, int min, int max){
     phraseCount = 1;
     _root = prime(byteArray, min, max);
     _toString = "";
+    _phraseCount = 0;
   }
 
-  public SearchTree(Byte pattern){
+  public SearchTree(Byte pattern, int phraseKey){
 
-    _root = new LeafNode(pattern);
+    _root = new LeafNode(pattern, phraseKey);
   }
 
   public SearchTree(){
@@ -44,8 +49,13 @@ class SearchTree {
     			return null;
     }
 		int median = (min + max) / 2;
+<<<<<<< HEAD
 		LeafNode root = new LeafNode(patterns[median], phraseCount);
     phraseCount++;
+=======
+		LeafNode root = new LeafNode(patterns[median], _phraseCount);
+    _phraseCount++;
+>>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 		root._left = prime(patterns, min, median - 1);
 		root._right = prime(patterns, median + 1, max);
 		return root;
@@ -109,10 +119,10 @@ class SearchTree {
    *  Inserts a LeadNode into the tree depending on the nodes value
    *  @returns void
    */
-  public void insert(Byte pattern){
+  public void insert(Byte pattern, int phraseKey){
     //currentNode to try insert into
     LeafNode currentNode;
-    LeafNode node = new LeafNode(pattern);
+    LeafNode node = new LeafNode(pattern, phraseKey);
 
     //if there is no value in the tree yet, the node goes into the root node
     if(_root == null){
@@ -158,12 +168,14 @@ class SearchTree {
 class LeafNode {
 
   public Byte _value;
+  public int _phraseKey;
   public LeafNode _left;
   public LeafNode _right;
   public TrieNode _trieNode;
 
   /*Constructor setting value*/
   public LeafNode(Byte value, int phraseKey){
+<<<<<<< HEAD
 
     _value = value;
     _left = null;
@@ -173,16 +185,27 @@ class LeafNode {
   }
 
   public LeafNode(Byte value){
+=======
+>>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
     _value = value;
     _left = null;
     _right = null;
+<<<<<<< HEAD
     _trieNode = null;
+=======
+    _phraseKey = phraseKey;
+    _nextPhrase = null;
+>>>>>>> 2918450dbc9fa955b81bc558a576ea31946ee868
 
   }
 
   public TrieNode getNextTrieNode(){
     return _trieNode;
+  }
+
+  public int getPhraseKey(){
+    return _phraseKey;
   }
 
   public LeafNode(){
