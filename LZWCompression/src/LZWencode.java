@@ -8,29 +8,12 @@ public class LZWencode {
 		FileOutputStream out = new FileOutputStream("output");
     //get input
     File file = new File(args[0]);
-		Scanner input = new Scanner(file);
 
     //setup Trie phrase dictionary
     Trie phraseList = new Trie(true);
-    int currentByte = 0;
-    Integer[] outputValues = new Integer[512];
     int phraseKeyCount = 257;
-    Byte[] buffer = new Byte[1];
     // InputStream inputstream = new FileInputStream(args[0]);
     BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
-
-    //check if the next input is in the phraseList
-    // while(currentByte < fileContent.length){
-    //   Byte[] ar = {fileContent[currentByte]};
-    //   System.out.println(findLongestPhrase(ar, null, null).getPhraseKey());
-    // }
-    //YES
-    //find the phrase number of the inputs
-    //check if the next input is in the Trie ^
-    //NO
-    //add the next input into the Trie
-    //update the bits needed to encode phrase number (Ceiling of Log2 P or 2^? = P)
-    //output the phrase number of the first input
 
     Byte currentInput;
     int phraseKey = 0;
@@ -68,21 +51,5 @@ public class LZWencode {
 
     }
 
-    //find the first input in the trie
-    // TrieNode currentTrieNode = phraseList._root;
-    //
-    // LeafNode bytesLeaf = currentTrieNode.findLeaf(currentInput);
-    //
-    // currentTrieNode = bytesLeaf.getNextTrieNode();
-    //
-    // int currentPhraseKey = currentTrieNode.getPhraseKey();
-    //
-    // System.out.println(currentPhraseKey);
-
-
   }
-
-
-
-
 }
