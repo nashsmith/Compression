@@ -3,13 +3,6 @@ import java.util.*;
 
 public class LZWencode {
 
-  static byte[] temp;
-  static Byte[] fileContent;
-  //setup Trie phrase dictionary
-  static Trie phraseList;
-  static int currentByte;
-  static int outputPhraseKey;
-
   public static void main (String[] args) throws IOException{
     //initialize output file
 		FileOutputStream out = new FileOutputStream("output");
@@ -18,65 +11,13 @@ public class LZWencode {
 		Scanner input = new Scanner(file);
 
     //setup Trie phrase dictionary
-    phraseList = new Trie(true);
-    currentByte = 0;
-    Byte byteTemp;
-    Byte[] currentPhrase = {fileContent[currentByte]};
-    Byte nextBytePattern;
+    Trie phraseList = new Trie(true);
+    int currentByte = 0;
     Integer[] outputValues = new Integer[512];
-    int outputCount = 0;
     int phraseKeyCount = 257;
-
-    while((nextBytePattern = fileContent[currentByte + 1]) != null){
-      for(int i = 0; i < currentPhrase.length; i++){
-        System.out.print(currentPhrase[i] + " ");
-        if(i == currentPhrase.length - 1){
-          System.out.print('\n');
-        }
-      }
-      Byte[] nextPhrase = new Byte[currentPhrase.length + 1];
-      for(int i = 0; i < currentPhrase.length; i++){
-         nextPhrase[i] = currentPhrase[i];
-         //System.out.println(nextPhrase[i]);
-       }
-
-      nextPhrase[nextPhrase.length - 1] = nextBytePattern;
-      if(phraseList.contains(nextPhrase)){
-        currentPhrase = nextPhrase;
-        currentByte++;
-      }else{
-        //System.out.println(phraseList.findPhrase(currentPhrase));
-        //System.out.println(phraseList.findPhrase(currentPhrase)._values.find(currentPhrase[currentPhrase.length - 1]));
-        LeafNode phrase = phraseList.findPhrase(currentPhrase).findValue(currentPhrase[currentPhrase.length - 1]);
-        if(phrase == null){
-          System.out.println("Did not find phrase");
-          return;
-        }
-        outputValues[outputCount] = phrase.getPhraseKey();
-        if(phrase._nextPhrase == null){
-          System.out.println("Making nextPhrase TrieNode");
-          phrase._nextPhrase = new TrieNode(nextBytePattern, phraseKeyCount);
-        }else{
-          System.out.println("Inserting into nextPhrase TrieNode");
-          phrase._nextPhrase._values.insert(nextBytePattern, phraseKeyCount);
-        }
-      phraseKeyCount++;
-        currentPhrase = new Byte[] {nextBytePattern};
-        currentByte++;
-      }
-
-      // Byte[] ar = {fileContent[currentByte]};
-      // System.out.println(phraseList.findPhraseKey(ar));
-
-    }
-
-    for(int i = 0; i < outputValues.length; i++){
-      if(outputValues[i] != null){
-        System.out.println(outputValues[i]);
-      }else{
-        break;
-      }
-    }
+    Byte[] buffer = new Byte[1];
+    // InputStream inputstream = new FileInputStream(args[0]);
+    BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
 
     //check if the next input is in the phraseList
     // while(currentByte < fileContent.length){
@@ -91,57 +32,57 @@ public class LZWencode {
     //update the bits needed to encode phrase number (Ceiling of Log2 P or 2^? = P)
     //output the phrase number of the first input
 
-    Byte currentInput = new Byte(input.nextByte());
+    Byte currentInput;
+    int phraseKey = 0;
+    int temp;
+    while((temp = inputstream.read()) != -1){
+      currentInput = new Byte((byte)(temp - 128));
+      //find the first input in the trie
+      TrieNode currentTrieNode = phraseList._root;
+
+      //while the current byte is in the current trienodes list of values
+      while(currentTrieNode.contains(currentInput)){
+        //if the current bytes leaf node has a nexttrienode then the pattern exists
+        if(currentTrieNode.findValue(currentInput).getNextTrieNode() != null){
+          currentTrieNode = currentTrieNode.findValue(currentInput).getNextTrieNode();
+          phraseKey = currentTrieNode.getPhraseKey();
+          inputstream.mark(2);
+          currentInput = new Byte((byte)inputstream.read());
+        //if the nexttrienode is not initialized then the pattern doesnt exists
+        //add the next trienode with currentPhraseKey
+        //break
+        }else{
+          currentTrieNode.findValue(currentInput)._trieNode = new TrieNode(currentInput, phraseKeyCount);
+          phraseKeyCount++;
+          break;
+        }
+      }
+      //currentTrieNode is the nextTrieNode of the last byte of the longest pattern
+      //output the phraseKey
+      System.out.println(phraseKey);
+      String s = phraseKey + "\n";
+      byte[] o = s.getBytes();
+      out.write(o);
+      //reset inputstream
+      inputstream.reset();
+
+    }
 
     //find the first input in the trie
-    TrieNode currentTrieNode = phraseList._root;
-
-    LeafNode bytesLeaf = currentTrieNode.findLeaf(currentInput);
-
-    currentTrieNode = bytesLeaf.getNextTrieNode();
-
-    int currentPhraseKey = currentTrieNode.getPhraseKey();
-
-    System.out.println(currentPhraseKey);
-
-
+    // TrieNode currentTrieNode = phraseList._root;
+    //
+    // LeafNode bytesLeaf = currentTrieNode.findLeaf(currentInput);
+    //
+    // currentTrieNode = bytesLeaf.getNextTrieNode();
+    //
+    // int currentPhraseKey = currentTrieNode.getPhraseKey();
+    //
+    // System.out.println(currentPhraseKey);
 
 
-
-
-
-
-
-    //find first inputs phrase number
-
-    //check if the next input is in the Trie
-    //YES
-    //find the phrase number of the inputs
-    //check if the next input is in the Trie ^
-    //NO
-    //add the next input into the Trie
-    //update the bits needed to encode phrase number (Ceiling of Log2 P or 2^? = P)
-    //output the phrase number of the first input
   }
 
-  // public static LeafNode findLongestPhrase(Byte[] phrase, TrieNode lastNode, Byte[] lastPhrase){
-  //   if(phraseList.findPhrase(phrase) != null){
-  //     //outputPhraseKey = phraseList.findPhraseKey({fileContent[currentByte]});
-  //     currentByte++;
-  //     if(currentByte < fileContent.length){
-  //       int phraseLength = phrase.length;
-  //       Byte[] nextPhrase = new Byte[phraseLength + 1];
-  //       for(int i = 0; i < phraseLength; i++){
-  //         nextPhrase[i] = phrase[i];
-  //       }
-  //       nextPhrase[phraseLength] = fileContent[currentByte];
-  //       return findLongestPhrase(nextPhrase, phraseList.findPhrase(phrase), phrase);
-  //     }else{
-  //       return phraseList.findPhrase(phrase)._values.find(phrase[phrase.length - 1]);
-  //     }
-  //   }
-  //   return lastNode._values.find(phrase[phrase.length - 1]);
-  //
-  // }
+
+
 
 }

@@ -7,7 +7,7 @@ class SearchTree {
 
   /*Constructor setting value*/
   public SearchTree(Byte[] byteArray, int min, int max){
-    phraseCount = 1;
+    _phraseCount = 1;
     _root = prime(byteArray, min, max);
     _toString = "";
     _phraseCount = 0;
@@ -16,6 +16,11 @@ class SearchTree {
   public SearchTree(Byte pattern, int phraseKey){
 
     _root = new LeafNode(pattern, phraseKey);
+  }
+
+  public SearchTree(Byte pattern){
+
+    _root = new LeafNode(pattern);
   }
 
   public SearchTree(){
@@ -159,7 +164,6 @@ class SearchTree {
 class LeafNode {
 
   public Byte _value;
-  public int _phraseKey;
   public LeafNode _left;
   public LeafNode _right;
   public TrieNode _trieNode;
@@ -170,7 +174,7 @@ class LeafNode {
     _value = value;
     _left = null;
     _right = null;
-    _trieNode = new TrieNode(phraseKey);
+    _trieNode = new TrieNode(value, phraseKey);
 
   }
 
@@ -185,10 +189,6 @@ class LeafNode {
 
   public TrieNode getNextTrieNode(){
     return _trieNode;
-  }
-
-  public int getPhraseKey(){
-    return _phraseKey;
   }
 
   public LeafNode(){
