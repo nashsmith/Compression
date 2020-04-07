@@ -1,0 +1,11 @@
+
+LZWCompression/BrownCorpus.txt
+LZWCompression/BrownCorpusinput
+LZWCompression/input
+LZWCompression/output
+LZWCompression/MobyDick.txt
+LZWCompression/MobyDickinput
+LZWCompression/input
+LZWCompression/output
+LZWCompression/src/LZWencode.java
+LZWCompression/bitpack

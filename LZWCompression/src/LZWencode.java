@@ -11,7 +11,7 @@ public class LZWencode {
 
     //setup Trie phrase dictionary
     Trie phraseList = new Trie(true);
-    int phraseKeyCount = 257;
+    int phraseKeyCount = 256;
     // InputStream inputstream = new FileInputStream(args[0]);
     BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
 
