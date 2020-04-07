@@ -19,9 +19,13 @@ public class LZWunpack {
     for(int i = 0; i < 255; i++){
       seenKeys.add(i);
     }
+
+    int phraseNumber = 256;
+
     //System.out.println(log2(largestKeyValue));
-    int bitsPerKey = updateBitsPerKey(seenKeys);
+    int bitsPerKey = updateBitsPerKey(phraseNumber);
     System.out.println(bitsPerKey);
+
 
     currentInput = 0;
     buffer = 0;
@@ -53,10 +57,8 @@ public class LZWunpack {
         currentInput >>= bitsPerKey;
         System.out.println("Input after shift off: " + Integer.toBinaryString(currentInput));
 
-        if(!seenKeys.contains(keyValue)){
-          seenKeys.add(keyValue);
-          bitsPerKey = updateBitsPerKey(seenKeys);
-        }
+        phraseNumber++;
+        bitsPerKey = updateBitsPerKey(phraseNumber);
         System.out.println("Phrase Key: " + keyValue);
 
         String s = keyValue + "\n";
@@ -91,7 +93,7 @@ public class LZWunpack {
     return (Math.log(x) / Math.log(2));
   }
 
-  public static int updateBitsPerKey(LinkedList<Integer> listOfKeys){
-    return (int)Math.ceil(log2(listOfKeys.size()));
+  public static int updateBitsPerKey(int phraseNumber){
+    return (int)Math.ceil(log2(phraseNumber));
   }
 }
