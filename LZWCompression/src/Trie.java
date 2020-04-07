@@ -14,7 +14,7 @@ class Trie {
     if(prime){
       Byte[] bArray = new Byte[256];
       for(int i = -128; i < 128; i++){
-        bArray[i + 128] = new Byte(Integer.toString(i));
+        bArray[i + 128] = (byte)i;
       }
       //prime the roots search tree with all byte patterns
       _root._values = new SearchTree(bArray, 0, bArray.length - 1);

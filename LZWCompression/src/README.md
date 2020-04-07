@@ -1,10 +1,16 @@
 ## Usage
 
+All programs output a file for marking purposes (i.e. to check phrase numbers etc.)
 
 ```
 Compressing:  java LZWencode "filename"
-- This will encode and also bitpack the file.
+- This will encode the file into an encoded file
 
-Decompressing: java LZWdecode "packed_file_name"
-- This will first unpack and then decode the packed file
-```
+Bitpacking: java LZWpack
+- Will automatically bitpack the file made by LZWencode into a packed file
+
+Bitunpacking: java LZWunpack
+- Will automatically unpack the file made by LZWpack into an unpacked file (should match encoded file)
+
+Decompressing: java LZWdecode
+- Will automatically decode the file made by LZWunpack into a file that matches the original
