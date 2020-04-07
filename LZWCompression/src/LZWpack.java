@@ -26,6 +26,8 @@ public class LZWpack {
 //		}
 		//initialise largest bit required
 		int bitsize = 8;
+		//initialise phrase numbers
+		int phrasenumber = 256;
 		//initialize byte buffers
 		byte b = 0;
 		//initialize buffer space b = 8
@@ -42,12 +44,20 @@ public class LZWpack {
 		while(input.hasNext()) {
 			//get next 32-bit integer
 			bit = input.nextInt();
-			//set x to largest bit required
-			int currentsize = (int) Math.ceil(Math.log(bit)/Math.log(2));
+			//iterate phrase number
+			phrasenumber++;
+			//iterate largest bit required if necessary
+			int currentsize = (int) Math.ceil(Math.log(phrasenumber)/Math.log(2));
 			if(currentsize > bitsize) {
 				bitsize = currentsize;
 			}
 			x = bitsize;
+//			//set x to largest bit required
+//			int currentsize = (int) Math.ceil(Math.log(bit)/Math.log(2));
+//			if(currentsize > bitsize) {
+//				bitsize = currentsize;
+//			}
+//			x = bitsize;
 			while(x!=0) {
 				if(x > 8) {
 					//shift right x - b where x = number of significant bits left and b is spaces left on buffer

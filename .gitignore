@@ -9,3 +9,4 @@ LZWCompression/input
 LZWCompression/output
 LZWCompression/src/LZWencode.java
 LZWCompression/bitpack
+LZWCompression/packed
