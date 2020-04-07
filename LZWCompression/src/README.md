@@ -1,5 +1,5 @@
 ## Authors:
-- Konny Brown
+- Konny Brown (1171612)
 - Nash Smith (1277758)
 
 

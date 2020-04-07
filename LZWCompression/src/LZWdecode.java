@@ -59,6 +59,8 @@ public class LZWdecode {
 	  }
 
 	private static void outputByteStack(Stack<Byte> stack, FileOutputStream o) throws IOException {
+		//unneeded suppress warning (since we pass in a Stack<Byte>stack but won't compile nicely without
+		@SuppressWarnings("unchecked")
 		Stack<Byte> b = (Stack<Byte>) stack.clone();
 		while(!b.empty()) {
 			o.write(b.peek());
