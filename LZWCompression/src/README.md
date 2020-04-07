@@ -1,3 +1,8 @@
+## Authors:
+- Konny Brown
+- Nash Smith (1277758)
+
+
 ## Usage
 
 All programs output a file for marking purposes (i.e. to check phrase numbers etc.)
