@@ -10,7 +10,7 @@ public class LZWunpack {
   public static void main(String[] args) throws IOException{
 
     //initialize output file
-		FileOutputStream out = new FileOutputStream("unpacked.txt");
+		FileOutputStream out = new FileOutputStream("unpacked");
     //get input
     BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
 

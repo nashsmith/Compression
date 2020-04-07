@@ -3,6 +3,12 @@ import java.util.*;
 
 public class LZWdecode {
 	public static void main (String[] args) throws IOException{
+		LZWunpack bitUnpacker = new LZWunpack();
+    String[] args2 = {args[0]};
+    bitUnpacker.main(args2);
+    System.out.println("Done UNPACKING.");
+		System.out.println("Starting decoding");
+
 		//initialize output file
 		FileOutputStream out = new FileOutputStream("decoded");
 		//initialize dictionary
@@ -16,7 +22,8 @@ public class LZWdecode {
 			num++;
 			}
 		//get input
-		File file = new File(args[0]);
+		// File file = new File(args[0]);
+		File file = new File("unpacked");
 		Scanner input = new Scanner(file);
 		//initialize variables and take first pattern
 		int currentmapkey = 256;

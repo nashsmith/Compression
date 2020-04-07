@@ -65,6 +65,11 @@ public class LZWencode {
       inputstream.reset();
 
     }
-
+    LZWpack bitPacker = new LZWpack();
+    String[] args2 = {"encoded"};
+    bitPacker.main(args2);
+    System.out.println("Done packing.");
   }
+
+
 }
