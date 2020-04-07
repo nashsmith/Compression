@@ -4,7 +4,7 @@ import java.util.*;
 public class LZWdecode {
 	public static void main (String[] args) throws IOException{
 		//initialize output file
-		FileOutputStream out = new FileOutputStream("output");
+		FileOutputStream out = new FileOutputStream("decoded");
 		//initialize dictionary
 		Map<Integer, Phrase> dictionary = new HashMap<Integer,Phrase>();
 		int i = 0;
@@ -49,11 +49,11 @@ public class LZWdecode {
         	outputByteStack(s, out);
         	//iterate variables
         	lastphrasenumber = n;
-        	currentmapkey++;      	
+        	currentmapkey++;
         }
         input.close();
 	  }
-	
+
 	private static void outputByteStack(Stack<Byte> stack, FileOutputStream o) throws IOException {
 		Stack<Byte> b = (Stack<Byte>) stack.clone();
 		while(!b.empty()) {

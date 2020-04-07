@@ -32,7 +32,7 @@ public class LZWpack {
 		int bufferspace = 8;
 		//initialize input and output
 //		input = new Scanner(file);
-		FileOutputStream out = new FileOutputStream("bitpack");
+		FileOutputStream out = new FileOutputStream("packed");
 //		//output largest bit required
 //		out.write(bitsize);
 		int bit;

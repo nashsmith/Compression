@@ -5,7 +5,7 @@ public class LZWencode {
 
   public static void main (String[] args) throws IOException{
     //initialize output file
-		FileOutputStream out = new FileOutputStream("output");
+		FileOutputStream out = new FileOutputStream("encoded");
     //get input
     File file = new File(args[0]);
 
