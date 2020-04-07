@@ -45,7 +45,7 @@ public class LZWpack {
 			//get next 32-bit integer
 			bit = input.nextInt();
 			//iterate phrase number
-			phrasenumber++;
+			// phrasenumber++;
 			//iterate largest bit required if necessary
 			int currentsize = (int) Math.ceil(Math.log(phrasenumber)/Math.log(2));
 			if(currentsize > bitsize) {
@@ -87,6 +87,7 @@ public class LZWpack {
 					}
 				}
 			}
+			phrasenumber++;
 		}
 		if(bufferspace != 8) {
 			out.write(b);

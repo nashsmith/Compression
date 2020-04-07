@@ -21,6 +21,7 @@ public class LZWunpack {
     }
 
     int phraseNumber = 256;
+    int offset = 0;
 
     //System.out.println(log2(largestKeyValue));
     int bitsPerKey = updateBitsPerKey(phraseNumber);
@@ -31,30 +32,40 @@ public class LZWunpack {
     buffer = 0;
 
     while((buffer = inputstream.read()) != -1){
+
       System.out.println("bitsPerKey: "+ bitsPerKey);
 
       System.out.println("Buffer at read: " + Integer.toBinaryString(buffer));
 
-      if(Integer.numberOfLeadingZeros(currentInput) == 32){
+      if(currentInput == 0){
         int mask = (int)Math.pow(2, bitsPerKey) - 1;
+        // int mask = 0;
         System.out.println("Mask: " + Integer.toBinaryString(mask));
         currentInput = buffer & mask;
+        currentInput <<= 24;
+        offset += 8;
+        // buffer >>= 32;
         System.out.println("Input after buffer added: " + Integer.toBinaryString(currentInput));
       }else{
-        buffer = buffer << (32 - Integer.numberOfLeadingZeros(currentInput));
+        // buffer = buffer << (32 - Integer.numberOfLeadingZeros(currentInput));
+        buffer <<= 24;
+        buffer >>>= offset;
+        offset += 8;
         System.out.println("Buffer at shift: " + Integer.toBinaryString(buffer));
         currentInput = buffer | currentInput;
         System.out.println("Input after buffer added: " + Integer.toBinaryString(currentInput));
       }
 
-      if((32 - Integer.numberOfLeadingZeros(currentInput) >= bitsPerKey)){
+      if((offset >= bitsPerKey)){
         //unpack
-        int andValue = (int)Math.pow(2, bitsPerKey) - 1;
+        int andValue = 2147483647;
         System.out.println("andValue: " + Integer.toBinaryString(andValue));
-        int keyValue = currentInput & andValue;
+        int keyValue = currentInput;
         System.out.println("keyValue: " + Integer.toBinaryString(keyValue));
-
-        currentInput >>= bitsPerKey;
+        keyValue >>>= 32 - bitsPerKey;
+        System.out.println("keyValue AFTER shift: " + Integer.toBinaryString(keyValue));
+        currentInput <<= bitsPerKey;
+        offset -= bitsPerKey;
         System.out.println("Input after shift off: " + Integer.toBinaryString(currentInput));
 
         phraseNumber++;
