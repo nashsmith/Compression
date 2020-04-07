@@ -22,7 +22,7 @@ class SearchTree {
 
     _root = new LeafNode(pattern);
   }
-  
+
   public SearchTree(){
 
     _root = null;
@@ -166,7 +166,7 @@ class LeafNode {
   public Byte _value;
   public LeafNode _left;
   public LeafNode _right;
-  public TrieNode _trieNode;
+  public TrieNode _trieNode; //the trienode containing the phrasekey for this pattern
 
   /*Constructor setting value*/
   public LeafNode(Byte value, int phraseKey){
@@ -175,8 +175,6 @@ class LeafNode {
     _left = null;
     _right = null;
     _trieNode = new TrieNode(phraseKey);
-
-
   }
 
   public LeafNode(Byte value){
@@ -185,7 +183,6 @@ class LeafNode {
     _left = null;
     _right = null;
     _trieNode = null;
-
   }
 
   public LeafNode(){
@@ -194,7 +191,6 @@ class LeafNode {
     _left = null;
     _right = null;
     _trieNode = null;
-
   }
 
   public TrieNode getNextTrieNode(){
