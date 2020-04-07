@@ -1,18 +1,18 @@
 import java.io.*;
-import java.util.*;
 
 public class LZWencode {
 
   public static void main (String[] args) throws IOException{
+	System.out.println("Started encoding");
     //initialize output file
-		FileOutputStream out = new FileOutputStream("encoded");
-    //get input
-    File file = new File(args[0]);
+	FileOutputStream out = new FileOutputStream("encoded");
+		
 
     //setup Trie phrase dictionary
     Trie phraseList = new Trie(true);
     int phraseKeyCount = 256;
-    // InputStream inputstream = new FileInputStream(args[0]);
+    
+    //get input
     BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
 
     Byte currentInput;
@@ -20,9 +20,9 @@ public class LZWencode {
     int temp;
     while((temp = inputstream.read()) != -1){
       if(temp < 128){
-        currentInput = new Byte((byte)(temp));
+        currentInput = (byte)temp;
       }else{
-        currentInput = new Byte((byte)(temp - 256));
+        currentInput = (byte)(temp - 256);
       }
 
       //find the first input in the trie
@@ -37,11 +37,10 @@ public class LZWencode {
           inputstream.mark(1);
           temp = inputstream.read();
           if(temp < 128){
-            currentInput = new Byte((byte)(temp));
+            currentInput = (byte)temp;
           }else{
-            currentInput = new Byte((byte)(temp - 256));
+            currentInput = (byte)(temp - 256);
           }
-          // currentInput = new Byte((byte)inputstream.read());
         //if the nexttrienode is not initialized then the pattern doesnt exists
         //add the next trienode with currentPhraseKey
         //break
@@ -56,20 +55,15 @@ public class LZWencode {
       phraseKeyCount++;
     }
       //currentTrieNode is the nextTrieNode of the last byte of the longest pattern
-      //output the phraseKey
-      System.out.println(phraseKey);
       String s = phraseKey + "\n";
+      //output the phraseKey
       byte[] o = s.getBytes();
       out.write(o);
       //reset inputstream
       inputstream.reset();
-
     }
-    LZWpack bitPacker = new LZWpack();
-    String[] args2 = {"encoded"};
-    bitPacker.main(args2);
-    System.out.println("Done packing.");
+    inputstream.close();
+    out.close();
+    System.out.println("Finished encoding");
   }
-
-
 }

@@ -3,10 +3,6 @@ import java.util.*;
 
 public class LZWdecode {
 	public static void main (String[] args) throws IOException{
-		LZWunpack bitUnpacker = new LZWunpack();
-    String[] args2 = {args[0]};
-    bitUnpacker.main(args2);
-    System.out.println("Done UNPACKING.");
 		System.out.println("Starting decoding");
 
 		//initialize output file
@@ -58,6 +54,7 @@ public class LZWdecode {
         	lastphrasenumber = n;
         	currentmapkey++;
         }
+        System.out.println("Finished decoding");
         input.close();
 	  }
 

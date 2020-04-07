@@ -8,11 +8,12 @@ public class LZWunpack {
   static int currentInput;
 
   public static void main(String[] args) throws IOException{
+	System.out.println("Started bitunpacking");
 
     //initialize output file
-		FileOutputStream out = new FileOutputStream("unpacked");
+	FileOutputStream out = new FileOutputStream("unpacked");
     //get input
-    BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream(args[0]));
+    BufferedInputStream inputstream = new BufferedInputStream(new FileInputStream("packed"));
 
     LinkedList<Integer> seenKeys = new LinkedList<Integer>();
 
@@ -22,10 +23,7 @@ public class LZWunpack {
 
     int phraseNumber = 256;
     int offset = 0;
-
-    //System.out.println(log2(largestKeyValue));
     int bitsPerKey = updateBitsPerKey(phraseNumber);
-    System.out.println(bitsPerKey);
 
 
     currentInput = 0;
@@ -33,57 +31,37 @@ public class LZWunpack {
 
     while((buffer = inputstream.read()) != -1){
 
-      System.out.println("bitsPerKey: "+ bitsPerKey);
-      System.out.println("offset: "+ offset);
-
-      System.out.println("Buffer at read: " + Integer.toBinaryString(buffer));
-
       if(currentInput == 0 && offset == 0){
         int mask = (int)Math.pow(2, bitsPerKey) - 1;
-        // int mask = 0;
-        System.out.println("Mask: " + Integer.toBinaryString(mask));
         currentInput = buffer & mask;
         currentInput <<= 24;
         offset += 8;
-        // buffer >>= 32;
-        System.out.println("Input after buffer added: " + Integer.toBinaryString(currentInput));
       }else{
-        // buffer = buffer << (32 - Integer.numberOfLeadingZeros(currentInput));
         buffer <<= 24;
         buffer >>>= offset;
         offset += 8;
-        System.out.println("Buffer at shift: " + Integer.toBinaryString(buffer));
         currentInput = buffer | currentInput;
-        System.out.println("Input after buffer added: " + Integer.toBinaryString(currentInput));
       }
 
       if((offset >= bitsPerKey)){
         //unpack
-        int andValue = 2147483647;
-        System.out.println("andValue: " + Integer.toBinaryString(andValue));
         int keyValue = currentInput;
-        System.out.println("keyValue: " + Integer.toBinaryString(keyValue));
         keyValue >>>= 32 - bitsPerKey;
-        System.out.println("keyValue AFTER shift: " + Integer.toBinaryString(keyValue));
         currentInput <<= bitsPerKey;
         offset -= bitsPerKey;
-        System.out.println("Input after shift off: " + Integer.toBinaryString(currentInput));
-
         phraseNumber++;
         bitsPerKey = updateBitsPerKey(phraseNumber);
-        System.out.println("Phrase Key: " + keyValue);
-
         String s = keyValue + "\n";
         byte[] o = s.getBytes();
         out.write(o);
-
       }else{
         //get another byte
       }
 
     }
-
-    //System.out.println(bitsPerKey);
+    out.close();
+    inputstream.close();
+    System.out.println("Finished bitunpacking");
   }
 
   public static void bufferToInput(){
