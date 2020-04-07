@@ -9,28 +9,32 @@ public class LZWpack {
 		File file = new File(args[0]);
 		Scanner input = new Scanner(file);
 		//find largest bit required by iterating through file
-		int n = input.nextInt();
-		int t;
-		while(input.hasNext()){
-			 t = input.nextInt();
-			 if(n <= t) {
-				 n = t;
-			 }
-	    }
-		input.close();
-		//output largest bit required
-		int bitsize = 0;
-		while (n > 0) {
-		    bitsize++;
-		    n = n >> 1;
-		}
+//		int n = input.nextInt();
+//		int t;
+//		while(input.hasNext()){
+//			 t = input.nextInt();
+//			 if(n <= t) {
+//				 n = t;
+//			 }
+//	    }
+//		input.close();
+//		//compute largest bit required
+//		int bitsize = 0;
+//		while (n > 0) {
+//		    bitsize++;
+//		    n = n >> 1;
+//		}
+		//initialise largest bit required
+		int bitsize = 8;
 		//initialize byte buffers
 		byte b = 0;
 		//initialize buffer space b = 8
 		int bufferspace = 8;
 		//initialize input and output
-		input = new Scanner(file);
+//		input = new Scanner(file);
 		FileOutputStream out = new FileOutputStream("bitpack");
+//		//output largest bit required
+//		out.write(bitsize);
 		int bit;
 		int tmp;
 		int x;
@@ -39,6 +43,10 @@ public class LZWpack {
 			//get next 32-bit integer
 			bit = input.nextInt();
 			//set x to largest bit required
+			int currentsize = (int) Math.ceil(Math.log(bit)/Math.log(2));
+			if(currentsize > bitsize) {
+				bitsize = currentsize;
+			}
 			x = bitsize;
 			while(x!=0) {
 				if(x > 8) {
