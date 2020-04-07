@@ -34,10 +34,11 @@ public class LZWunpack {
     while((buffer = inputstream.read()) != -1){
 
       System.out.println("bitsPerKey: "+ bitsPerKey);
+      System.out.println("offset: "+ offset);
 
       System.out.println("Buffer at read: " + Integer.toBinaryString(buffer));
 
-      if(currentInput == 0){
+      if(currentInput == 0 && offset == 0){
         int mask = (int)Math.pow(2, bitsPerKey) - 1;
         // int mask = 0;
         System.out.println("Mask: " + Integer.toBinaryString(mask));
