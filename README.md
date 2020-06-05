@@ -1,5 +1,5 @@
-# COMPX301
+# LZW Compression (.zip)
+### A program that takes in a file and compresses it using LZW. It also contains a lossless decompresser.
+#### By Nash Smith & Konny Shim \
 
-https://algorithms.tutorialhorizon.com/sorted-array-to-binary-search-tree-of-minimal-height/
-
-https://www.cs.waikato.ac.nz/~tcs/COMP317/bitpacking.html
+**Assignment Grade:** A+ (94%)
